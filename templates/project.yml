@@ -1,12 +1,12 @@
-# Project template (software, GitHub repos, tools). Paste under `projects:` in _data/cv.yml, newest first or any order
+# Project template (software, GitHub repos, tools). Paste at the end of _data/projects.yml, in any order
 # (the site sorts by year). Only year and title are required. `link` is the title link; `links` are the small
 # links under the row (GitHub, PyPI, docs, demo, ...).
-  - year: 2026
-    title: Project name
-    summary: One line on what it does and why it exists.
-    link: https://github.com/your-username/your-repo
-    links:
-      - { label: GitHub, url: "https://github.com/your-username/your-repo" }
-      - { label: PyPI, url: "https://pypi.org/project/your-package/" }
-      - { label: Docs, url: "https://your-username.github.io/your-repo/" }
-      - { label: Demo, url: "https://example.com/demo" }
+- year: 2026
+  title: Project name
+  summary: One line on what it does and why it exists.
+  link: https://github.com/your-username/your-repo
+  links:
+    - { label: GitHub, url: "https://github.com/your-username/your-repo" }
+    - { label: PyPI, url: "https://pypi.org/project/your-package/" }
+    - { label: Docs, url: "https://your-username.github.io/your-repo/" }
+    - { label: Demo, url: "https://example.com/demo" }

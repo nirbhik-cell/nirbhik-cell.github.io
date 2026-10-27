@@ -1,0 +1,12 @@
+# Projects (software, repos, tools), shown on /projects/. Newest year first is applied automatically.
+# Only `year` and `title` are required. Copy templates/project.yml for the full shape.
+# Entries marked `sample: true` show a "Sample entry" note: edit the entry and delete that line, or delete the block.
+
+- year: 2026
+  title: laser-bench-tools
+  summary: A small Python package for controlling lab instruments and logging measurements.
+  link: https://github.com/your-username/laser-bench-tools
+  links:
+    - { label: GitHub, url: "https://github.com/your-username/laser-bench-tools" }
+    - { label: Docs, url: "https://your-username.github.io/laser-bench-tools/" }
+  sample: true

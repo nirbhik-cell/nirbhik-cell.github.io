@@ -1,0 +1,13 @@
+# Publications, shown on /projects/. Newest year first is applied automatically.
+# Only `year` and `title` are required. Copy templates/publication.yml for the full shape.
+# Entries marked `sample: true` show a "Sample entry" note: edit the entry and delete that line, or delete the block.
+
+- year: 2100
+  title: "Hopefully a real publication title"
+  authors: N. Gupta, A. Coauthor, B. Supervisor
+  venue: Journal Name, volume, pages
+  link: https://doi.org/10.0000/sample
+  links:
+    - { label: PDF, url: "https://example.com/paper.pdf" }
+    - { label: arXiv, url: "https://arxiv.org/abs/0000.00000" }
+  sample: true

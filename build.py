@@ -4,7 +4,8 @@ Usage:
     python build.py [--out DIR] [--drafts]
 
 Content: blog posts are Markdown files with front matter in _posts/. Everything else (CV,
-timeline, research rows, publications, projects, contact links) comes from _data/cv.yml.
+timeline, research rows, contact links) comes from _data/cv.yml; publications, projects and the
+extra Career/Life timeline tracks have their own files (publications.yml, projects.yml, timeline.yml).
 Templates are in layouts/. Set SITE_URL / BASE_URL in the environment to build for a
 custom domain or a repo sub-path (e.g. BASE_URL=/my-repo).
 """
@@ -234,11 +235,13 @@ def period_label(item: dict[str, Any]) -> str:
 
 
 def validate_cv(cv: dict[str, Any]) -> None:
-    """Fail the build with a clear message when cv.yml is malformed."""
+    """Fail the build with a clear message when the _data files are malformed."""
+    files = {"career": "timeline.yml", "life": "timeline.yml", "publication": "publications.yml", "project": "projects.yml"}
 
     def need(condition: bool, message: str) -> None:
         if not condition:
-            raise SystemExit(f"_data/cv.yml: {message}")
+            file = next((f for key, f in files.items() if message.startswith(key)), "cv.yml")
+            raise SystemExit(f"_data/{file}: {message}")
 
     for key in ("name", "initials", "headline", "intro"):
         need(bool(cv.get(key)), f"missing '{key}'")
@@ -257,12 +260,9 @@ def validate_cv(cv: dict[str, Any]) -> None:
     for track in ("career", "life"):
         for item in cv.get(track) or []:
             need(parse_when(item.get("start")) is not None and bool(item.get("title")), f"{track}: each entry needs a title and a start (YYYY or YYYY-MM)")
-    for item in cv.get("publications") or []:
-        need(all(item.get(k) for k in ("year", "title")), "each publication needs 'year' and 'title'")
-    for item in cv.get("projects") or []:
-        need(all(item.get(k) for k in ("year", "title")), "each project needs 'year' and 'title'")
-    for kind in ("projects", "publications"):
-        for item in cv.get(kind) or []:
+    for kind in ("publication", "project"):
+        for item in cv.get(f"{kind}s") or []:
+            need(all(item.get(k) for k in ("year", "title")), f"{kind}: each entry needs 'year' and 'title'")
             for link in item.get("links") or []:
                 need(bool(link.get("label")) and bool(link.get("url")), f"{kind} '{item.get('title')}': each entry in links needs a label and a url")
 
@@ -459,7 +459,16 @@ def build(out: Path, *, drafts: bool = False, dev: bool = False) -> dict[str, in
     site = {**SITE, "build_time": time.strftime("%Y%m%d%H%M%S"), "dev": dev, "cv_pdf": CV_PDF, "year": dt.date.today().year}
     data = load_data()
     env = make_env()
-    cv = prepare_cv(data["cv"])
+    timeline_data = data.get("timeline") or {}
+    cv = prepare_cv(
+        {
+            **data["cv"],
+            "publications": data.get("publications") or [],
+            "projects": data.get("projects") or [],
+            "career": timeline_data.get("career") or [],
+            "life": timeline_data.get("life") or [],
+        }
+    )
     posts = load_posts(ROOT / "_posts", drafts=drafts)
     socials = social_links(cv, data.get("socials") or [])
     site["description"] = f"{cv['name']}: {cv['headline'].rstrip('.')}. {cv['intro'].split('.')[0].strip()}."

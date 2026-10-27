@@ -17,7 +17,7 @@
     <{{ level }} class="row__title">{% if href %}<a href="{{ href }}"{% if external %} target="_blank" rel="noopener"{% endif %}>{{ title }}</a>{% else %}{{ title }}{% endif %}</{{ level }}>
     {% if line %}<p class="row__line">{{ line }}</p>{% endif %}
     {% if links %}<ul class="row__links" aria-label="Links for {{ title }}">{% for l in links %}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a></li>{% endfor %}</ul>{% endif %}
-    {% if sample %}<p class="row__sample">Sample entry: replace or delete it in _data/cv.yml.</p>{% endif %}
+    {% if sample %}<p class="row__sample">Sample entry: replace or delete it in the _data folder.</p>{% endif %}
     {{ caller() if caller else "" }}
   </div>
 </li>

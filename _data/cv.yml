@@ -1,4 +1,5 @@
-# Single source of truth for the CV page, the generated PDF, the timeline and the home About section.
+# Profile, contact, education, experience and skills. Feeds the CV page, the home About section and
+# the Education + Research timeline tracks. (Publications, projects and Career/Life tracks have their own files.)
 # PUBLIC version: no phone number, no home city, no references' emails.
 # Items marked DRAFT are my wording from what you told me; edit freely.
 
@@ -58,29 +59,5 @@ languages: [English, Hindi, Punjabi, French]
 
 references: available on request
 
-# SAMPLE entries (marked `sample: true`, which adds a "Sample entry" note on the page). To replace one with
-# a real entry, edit it and delete the `sample: true` line. To remove it, delete the whole block.
-publications:
-  - year: 2100
-    title: "Hopefully a real publication title"
-    authors: N. Gupta, A. Coauthor, B. Supervisor
-    venue: Journal Name, volume, pages
-    link: https://doi.org/10.0000/sample
-    links:
-      - { label: PDF, url: "https://example.com/paper.pdf" }
-      - { label: arXiv, url: "https://arxiv.org/abs/0000.00000" }
-    sample: true
-projects:
-  - year: 2026
-    title: laser-bench-tools
-    summary: A small Python package for controlling lab instruments and logging measurements.
-    link: https://github.com/your-username/laser-bench-tools
-    links:
-      - { label: GitHub, url: "https://github.com/your-username/laser-bench-tools" }
-      - { label: Docs, url: "https://your-username.github.io/laser-bench-tools/" }
-    sample: true
-
-# Optional extra timeline tracks (empty for now; the timeline shows "Nothing here yet").
-# Each entry: start (YYYY or YYYY-MM), end (optional), title, place (optional), note (optional).
-career: []
-life: []
+# Publications live in publications.yml, projects in projects.yml, and the extra
+# Career/Life timeline tracks in timeline.yml.

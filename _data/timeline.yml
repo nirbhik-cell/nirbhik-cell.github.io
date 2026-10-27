@@ -1,0 +1,6 @@
+# Extra timeline tracks. The Education and Research tracks come from `education:` and
+# `experience:` in cv.yml, so edit those there. Only Career and Life live here.
+# Each entry: start (YYYY or YYYY-MM), end (optional), title, place (optional), note (optional), link (optional).
+
+career: []
+life: []
