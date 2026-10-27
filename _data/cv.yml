@@ -13,7 +13,7 @@ intro: >-
 
 # Optional portrait for the About block. Put the file in assets/images/ and write its path, e.g.
 # photo: assets/images/nirbhik.jpg   (4:5 portrait works best, at least 400x500). Leave empty to show the placeholder.
-photo: "assets/images/nirbhik.jpg"
+photo: "assets/images/nirbhik.png"
 photo_alt: "Nirbhik Gupta"
 
 contact: 
