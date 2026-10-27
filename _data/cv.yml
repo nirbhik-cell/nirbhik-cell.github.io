@@ -13,14 +13,15 @@ intro: >-
 
 # Optional portrait for the About block. Put the file in assets/images/ and write its path, e.g.
 # photo: assets/images/nirbhik.jpg   (4:5 portrait works best, at least 400x500). Leave empty to show the placeholder.
-photo: ""
-photo_alt: ""
+photo: "assets/images/nirbhik.jpg"
+photo_alt: "Nirbhik Gupta"
 
-contact:
+contact: 
   email: guptanirbhik@gmail.com
   linkedin: https://www.linkedin.com/in/nirbhik-gupta
   github: https://www.github.com/nirbhik-cell
   email_institute: ms24240@iisermohali.ac.in
+  phone: +91 96676 47561
 
 education:
   - start: 2024
@@ -28,7 +29,7 @@ education:
     degree: BS-MS in Physics
     institution: Indian Institute of Science Education and Research (IISER), Mohali
     note: POSE scholarship, Govt. of Haryana
-    coursework: [Quantum Mechanics, Linear Algebra, Mathematical Methods for Physics]
+    
 
 experience:
   - start: 2026-05
