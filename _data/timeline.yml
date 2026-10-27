@@ -1,6 +1,14 @@
-# Extra timeline tracks. The Education and Research tracks come from `education:` and
-# `experience:` in cv.yml, so edit those there. Only Career and Life live here.
+# Extra timeline entries. Education comes from `education:` and Experience (research stints) from
+# `experience:` in cv.yml, so edit those there. Here:
+#   experience: other jobs or roles that should also appear in the Experience column
+#   learning:   courses, summer schools, books, self-study
+#   life:       off the clock
 # Each entry: start (YYYY or YYYY-MM), end (optional), title, place (optional), note (optional), link (optional).
 
-career: []
+experience: []
+learning:
+  - start: 2025-05
+    end: 2025-07
+    title: Nonlinear Dynamics and Chaos (Strogatz)
+    note: Self-study alongside the research internship at IISER Mohali.
 life: []

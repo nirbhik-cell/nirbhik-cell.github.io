@@ -96,8 +96,8 @@ LIGHT_CODE_FIXES = [
 # Timeline tracks, left to right: key, label, one-line blurb.
 TRACKS = [
     ("education", "Education", "Degrees and courses"),
-    ("research", "Research", "Labs and advisors"),
-    ("career", "Career", "Jobs and roles"),
+    ("experience", "Experience", "Research and jobs"),
+    ("learning", "Learning", "Courses and self-study"),
     ("life", "Life", "Off the clock"),
 ]
 
@@ -236,7 +236,7 @@ def period_label(item: dict[str, Any]) -> str:
 
 def validate_cv(cv: dict[str, Any]) -> None:
     """Fail the build with a clear message when the _data files are malformed."""
-    files = {"career": "timeline.yml", "life": "timeline.yml", "publication": "publications.yml", "project": "projects.yml"}
+    files = {"experience:": "timeline.yml", "learning:": "timeline.yml", "life:": "timeline.yml", "publication": "publications.yml", "project": "projects.yml"}
 
     def need(condition: bool, message: str) -> None:
         if not condition:
@@ -257,8 +257,8 @@ def validate_cv(cv: dict[str, Any]) -> None:
                 end.lower() in OPEN_ENDED or parse_when(end) is not None,
                 f"{section} '{label}': 'end' must be YYYY, YYYY-MM, 'present' or 'ongoing'",
             )
-    for track in ("career", "life"):
-        for item in cv.get(track) or []:
+    for track in ("experience", "learning", "life"):
+        for item in (cv.get("timeline_extra") or {}).get(track) or []:
             need(parse_when(item.get("start")) is not None and bool(item.get("title")), f"{track}: each entry needs a title and a start (YYYY or YYYY-MM)")
     for kind in ("publication", "project"):
         for item in cv.get(f"{kind}s") or []:
@@ -294,7 +294,7 @@ def prepare_cv(cv: dict[str, Any]) -> dict[str, Any]:
         {
             "id": slugify(f"{e['start']}-{e['role']}-{e['institution']}"),
             "sort": parse_when(e["start"]),
-            "track": "research",
+            "track": "experience",
             "year": str(parse_when(e["start"])[0]),
             "period": e["period"],
             "title": e["role"],
@@ -307,8 +307,8 @@ def prepare_cv(cv: dict[str, Any]) -> dict[str, Any]:
         }
         for e in experience
     ]
-    for track in ("career", "life"):
-        for e in cv.get(track) or []:
+    for track in ("experience", "learning", "life"):
+        for e in (cv.get("timeline_extra") or {}).get(track) or []:
             timeline.append(
                 {
                     "id": slugify(f"{e['start']}-{e['title']}"),
@@ -465,8 +465,7 @@ def build(out: Path, *, drafts: bool = False, dev: bool = False) -> dict[str, in
             **data["cv"],
             "publications": data.get("publications") or [],
             "projects": data.get("projects") or [],
-            "career": timeline_data.get("career") or [],
-            "life": timeline_data.get("life") or [],
+            "timeline_extra": {k: timeline_data.get(k) or [] for k in ("experience", "learning", "life")},
         }
     )
     posts = load_posts(ROOT / "_posts", drafts=drafts)
