@@ -380,7 +380,7 @@ def social_links(cv: dict[str, Any], order: list[dict[str, Any]]) -> list[dict[s
         if not value:
             continue
         link = {"label": item["label"], "icon": item["icon"]}
-        link["email" if item["key"] == "email" else "url"] = value
+        link["email" if item["key"].startswith("email") else "url"] = value
         links.append(link)
     return links
 
