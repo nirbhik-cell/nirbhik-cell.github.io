@@ -1,0 +1,12 @@
+# Contact links shown in the footer and on /contact/. Email is written as `email:` (not a
+# mailto link) so it is assembled client-side and kept away from scrapers.
+# Values come from _data/cv.yml (contact:) when build.py loads them; this file only sets order.
+- label: GitHub
+  icon: github
+  key: github
+- label: LinkedIn
+  icon: linkedin
+  key: linkedin
+- label: Email
+  icon: email
+  key: email

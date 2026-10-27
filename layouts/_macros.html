@@ -1,0 +1,35 @@
+{# One contact link. Email is assembled client-side from a reversed string. #}
+{% macro social_link(social) %}
+{% if social.email %}
+<a class="social-link" href="{{ '/contact/' | url }}" data-email="{{ social.email | reverse_str }}" aria-label="{{ social.label }}">{% include "icons/" ~ social.icon ~ ".svg" %}</a>
+{% else %}
+<a class="social-link" href="{{ social.url }}" aria-label="{{ social.label }}" target="_blank" rel="noopener me">{% include "icons/" ~ social.icon ~ ".svg" %}</a>
+{% endif %}
+{% endmacro %}
+
+{# A plain row: when, title, one line, optional body. `href` makes the title a link. #}
+{% macro row(when, title, line, href=None, external=False, level="h3", links=None, sample=False) %}
+<li class="row">
+  <span class="row__when">{{ when }}</span>
+  <div class="row__body">
+    <{{ level }} class="row__title">{% if href %}<a href="{{ href }}"{% if external %} target="_blank" rel="noopener"{% endif %}>{{ title }}</a>{% else %}{{ title }}{% endif %}</{{ level }}>
+    {% if line %}<p class="row__line">{{ line }}</p>{% endif %}
+    {% if links %}<ul class="row__links" aria-label="Links for {{ title }}">{% for l in links %}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a></li>{% endfor %}</ul>{% endif %}
+    {% if sample %}<p class="row__sample">Sample entry: replace or delete it in _data/cv.yml.</p>{% endif %}
+    {{ caller() if caller else "" }}
+  </div>
+</li>
+{% endmacro %}
+
+{# Research rows from cv.experience, newest first. #}
+{% macro research_rows(items) %}
+<ul class="rows">
+  {% for e in items %}
+    {% set where = ((e.lab ~ ", ") if e.lab else "") ~ e.institution %}
+    {% set advisor = ("Advisor: " ~ e.advisor) if e.advisor else None %}
+    {% call row(e.period, e.role ~ " · " ~ where, advisor, e.link, True) %}
+      {% if e.bullets %}<ul class="row__bullets">{% for b in e.bullets %}<li>{{ b }}</li>{% endfor %}</ul>{% endif %}
+    {% endcall %}
+  {% endfor %}
+</ul>
+{% endmacro %}

@@ -1,0 +1,85 @@
+# Single source of truth for the CV page, the generated PDF, the timeline and the home About section.
+# PUBLIC version: no phone number, no home city, no references' emails.
+# Items marked DRAFT are my wording from what you told me; edit freely.
+
+name: Nirbhik Gupta
+initials: NG
+
+headline: 3rd-year BS-MS Physics student at IISER Mohali.   # DRAFT
+# DRAFT: I will edit the interests line.
+intro: >-
+  Currently a research intern in nonlinear photonics at IIT Bombay.
+  Interested in nonlinear dynamics, nonlinear optics and laser physics.
+
+# Optional portrait for the About block. Put the file in assets/images/ and write its path, e.g.
+# photo: assets/images/nirbhik.jpg   (4:5 portrait works best, at least 400x500). Leave empty to show the placeholder.
+photo: ""
+photo_alt: ""
+
+contact:
+  email: guptanirbhik@gmail.com
+  linkedin: https://www.linkedin.com/in/nirbhik-gupta
+  github: https://www.github.com/nirbhik-cell
+  # institute email (ms24240@iisermohali.ac.in) intentionally not listed; add if you want it public
+
+education:
+  - start: 2024
+    end: ongoing
+    degree: BS-MS in Physics
+    institution: Indian Institute of Science Education and Research (IISER), Mohali
+    note: POSE scholarship, Govt. of Haryana
+    coursework: [Quantum Mechanics, Linear Algebra, Mathematical Methods for Physics]
+
+experience:
+  - start: 2026-05
+    end: present
+    role: Research Intern (hybrid)
+    lab: PhInLAB
+    institution: IIT Bombay
+    advisor: Prof. Arun Surendran
+    link: https://sites.google.com/view/phinlab/home
+    lab_description: "Nonlinear photonics and laser systems development: fiber laser sources used in spectroscopy and sensing."   # from the lab's own page
+    bullets:                                                                                                         # DRAFT
+      - Contributed to an ongoing fiber-laser experiment in a nonlinear photonics lab.
+      - Simulated cascaded four-wave mixing (FWM) in software, running the simulations on the Rudra supercomputer.
+  - start: 2025-05
+    end: 2025-07
+    role: Research Intern
+    institution: IISER Mohali
+    advisor: Prof. Sudeshna Sinha
+    bullets:                                                                                                         # DRAFT
+      - Studied nonlinear dynamics and chaos theory, following Strogatz's Nonlinear Dynamics and Chaos.
+
+skills:
+  programming: [Python, C/C++, MATLAB]
+  systems: [Linux (Ubuntu), HPC (Rudra supercomputer)]
+languages: [English, Hindi, Punjabi, French]
+
+references: available on request
+
+# SAMPLE entries (marked `sample: true`, which adds a "Sample entry" note on the page). To replace one with
+# a real entry, edit it and delete the `sample: true` line. To remove it, delete the whole block.
+publications:
+  - year: 2027
+    title: "A Title For Your First Paper"
+    authors: N. Gupta, A. Coauthor, B. Supervisor
+    venue: Journal Name, volume, pages
+    link: https://doi.org/10.0000/sample
+    links:
+      - { label: PDF, url: "https://example.com/paper.pdf" }
+      - { label: arXiv, url: "https://arxiv.org/abs/0000.00000" }
+    sample: true
+projects:
+  - year: 2026
+    title: laser-bench-tools
+    summary: A small Python package for controlling lab instruments and logging measurements.
+    link: https://github.com/your-username/laser-bench-tools
+    links:
+      - { label: GitHub, url: "https://github.com/your-username/laser-bench-tools" }
+      - { label: Docs, url: "https://your-username.github.io/laser-bench-tools/" }
+    sample: true
+
+# Optional extra timeline tracks (empty for now; the timeline shows "Nothing here yet").
+# Each entry: start (YYYY or YYYY-MM), end (optional), title, place (optional), note (optional).
+career: []
+life: []

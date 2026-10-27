@@ -1,0 +1,57 @@
+/* Optics handles, 404 puzzle, page transitions, print. */
+
+.handles { position: absolute; inset: 0; pointer-events: none; }
+.handle {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: 1px dashed transparent;
+  border-radius: 50%;
+  cursor: grab;
+  touch-action: none;
+  pointer-events: auto;
+}
+.handle:hover { border-color: var(--line-strong); }
+.handle:active { cursor: grabbing; }
+.handle:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-color: var(--accent); }
+
+/* 404 puzzle -------------------------------------------------------------------------- */
+.lost { max-width: 46rem; }
+.lost__stage { position: relative; aspect-ratio: 380 / 190; touch-action: pan-y; border: 1px solid var(--line); }
+.lost__stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.lost__status { min-height: 1.5em; margin: 0.6rem 0; font: 600 0.85rem var(--font-mono); color: var(--accent-text); }
+.lost__actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+/* Page transitions: beam-sweep wipe; plain fade when reduced motion is requested ------- */
+@view-transition { navigation: auto; }
+
+.sweep { position: fixed; top: 0; bottom: 0; left: 0; width: 3px; background: var(--beam); view-transition-name: sweep; pointer-events: none; opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) { animation: 260ms ease-in both fade-out; }
+  ::view-transition-new(root) { animation: 320ms var(--ease) both wipe-in; }
+  ::view-transition-group(sweep) { animation: 320ms var(--ease) both sweep-across; }
+  ::view-transition-old(sweep) { display: none; }
+  ::view-transition-new(sweep) { animation: none; }
+  :root:active-view-transition .sweep { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root) { animation: 120ms linear both fade-out; }
+  ::view-transition-new(root) { animation: 120ms linear both fade-in; }
+}
+@keyframes fade-out { to { opacity: 0.2; } }
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes wipe-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes sweep-across { from { transform: translateX(0); } to { transform: translateX(100vw); } }
+
+/* Print: hide the chrome; the CV sheet prints as is */
+@media print {
+  body::before, .rail, .site-footer, .skip-link, .sweep, .cv__header .button, .cv__text { display: none !important; }
+  .shell { display: block; }
+  .main > main { padding: 0; }
+  .cv__sheet img { filter: none !important; }
+  .cv__sheet { border: 0; background: #fff !important; }
+}

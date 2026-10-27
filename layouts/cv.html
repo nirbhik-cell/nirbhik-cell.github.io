@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="cv">
+  <header class="cv__header">
+    <div>
+      <h1>CV</h1>
+      <p class="cv__headline">{{ cv.name }}. {{ cv.headline }}</p>
+    </div>
+    <a class="button button--primary" href="{{ site.cv_pdf | url }}" download>Download PDF</a>
+  </header>
+
+  <div class="cv__pages">
+    {% for page in cv_pages %}
+      <figure class="cv__sheet">
+        <a href="{{ site.cv_pdf | url }}" tabindex="-1" aria-hidden="true"><img src="{{ page.src | url }}" width="{{ page.width }}" height="{{ page.height }}" alt="Page {{ page.number }} of {{ cv_pages | length }} of the CV of {{ cv.name }}. The full text is below." {% if not loop.first %}loading="lazy"{% endif %}></a>
+      </figure>
+    {% endfor %}
+  </div>
+
+  <details class="cv__text">
+    <summary>Read the CV as text</summary>
+    <pre>{{ cv_text }}</pre>
+  </details>
+</article>
+{% endblock %}

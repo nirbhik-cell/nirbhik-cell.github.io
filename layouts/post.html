@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block head %}
+  {% if post.math %}
+    <link rel="stylesheet" href="{{ '/assets/vendor/katex/katex.min.css' | url }}">
+  {% endif %}
+{% endblock %}
+{% block content %}
+<article class="article">
+  <header class="article__header">
+    <a class="back-link" href="{{ '/blog/' | url }}">&larr; Back to blog</a>
+    <p class="eyebrow">
+      <time datetime="{{ post.date | iso }}">{{ post.date | fmt_date }}</time>
+      &middot; {{ post.reading_time }} min read
+      {% if post.updated %}&middot; updated <time datetime="{{ post.updated | iso }}">{{ post.updated | fmt_date }}</time>{% endif %}
+      {% if post.draft %}&middot; draft{% endif %}
+    </p>
+    <h1>{{ post.title }}</h1>
+  </header>
+  {% if post.cover %}<img src="{{ post.cover | url }}" alt="{{ post.cover_alt or '' }}">{% endif %}
+  {% if post.toc %}
+    <nav class="toc" aria-labelledby="toc-title">
+      <h2 id="toc-title">On this page</h2>
+      {{ post.toc | safe }}
+    </nav>
+  {% endif %}
+  <div class="article__body">
+    {{ post.html | safe }}
+  </div>
+  {% if newer or older %}
+    <nav class="post-nav" aria-label="More posts">
+      {% if newer %}<a href="{{ newer.url | url }}"><span>Newer</span>{{ newer.title }}</a>{% else %}<span></span>{% endif %}
+      {% if older %}<a class="post-nav__older" href="{{ older.url | url }}"><span>Older</span>{{ older.title }}</a>{% endif %}
+    </nav>
+  {% endif %}
+</article>
+{% endblock %}
+{% block scripts %}
+  {% if post.math %}
+    <script src="{{ '/assets/vendor/katex/katex.min.js' | url }}" defer></script>
+    <script src="{{ '/assets/vendor/katex/auto-render.min.js' | url }}" defer></script>
+    <script src="{{ '/assets/js/math.js' | url }}" defer></script>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,207 @@
+/* Layout shell: instrument-panel side rail on desktop, compact top bar on mobile. */
+
+.shell {
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.rail {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.4rem 1.4rem;
+  border-right: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  font-family: var(--font-mono);
+  overflow-y: auto;
+}
+
+.rail__bar { display: flex; align-items: center; justify-content: space-between; }
+
+.wordmark {
+  display: block;
+  font: 700 1rem/1.25 var(--font-mono);
+  letter-spacing: 0.01em;
+  color: var(--text);
+  text-decoration: none;
+}
+.wordmark:hover { color: var(--accent-text); }
+
+.menu-button { display: none; }
+
+.rail__panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-top: 2.2rem;
+  min-height: 0;
+}
+
+.rail__group { margin: 0 0 1.6rem; padding: 0; list-style: none; }
+
+.rail__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 2.2rem;
+  padding-left: 1.4rem;
+  font-size: 0.84rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color var(--fast);
+}
+.rail__link::before {
+  /* the beam tick */
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0.55rem;
+  height: 1px;
+  background: var(--line-strong);
+  transition: width var(--fast) var(--ease), background var(--fast);
+}
+.rail__link:hover { color: var(--text); }
+.rail__link:hover::before { width: 0.9rem; background: var(--accent); }
+.rail__link[aria-current="page"] { color: var(--accent-text); font-weight: 600; }
+.rail__link[aria-current="page"]::before { width: 1.05rem; height: 2px; background: var(--accent); }
+
+.rail__foot {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+.theme-toggle {
+  display: none; /* needs JavaScript */
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 44px;
+  padding: 0;
+  font: 500 0.75rem var(--font-mono);
+  color: var(--text-dim);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.js .theme-toggle { display: inline-flex; }
+.theme-toggle:hover { color: var(--text); }
+
+/* Small switch: sun on the left, moon on the right; the thumb sits over the active one. */
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 3.2rem;
+  height: 1.7rem;
+  padding: 0 0.4rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  transition: border-color var(--fast), background var(--fast);
+}
+.theme-toggle:hover .switch { border-color: var(--accent); }
+.switch__icon { width: 0.85rem; height: 0.85rem; fill: none; stroke: var(--text-dim); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.switch__thumb {
+  position: absolute;
+  top: 50%;
+  left: 0.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: -0.6rem;
+  background: var(--accent);
+  border-radius: 50%;
+  transition: transform 220ms var(--ease);
+}
+/* Dark is "on": the thumb sits on the moon side. */
+:root[data-theme="dark"] .switch__thumb { transform: translateX(1.5rem); }
+:root[data-theme="light"] .switch__thumb { transform: none; }
+:root[data-theme="dark"] .switch__icon--moon,
+:root[data-theme="light"] .switch__icon--sun { stroke: var(--on-accent); position: relative; z-index: 1; }
+.theme-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 999px; }
+@media (prefers-reduced-motion: reduce) { .switch__thumb { transition: none; } }
+
+.main { min-width: 0; display: flex; flex-direction: column; min-height: 100vh; }
+.main > main { flex: 1; padding: clamp(1.5rem, 4vw, 3.5rem) max(clamp(1rem, 4vw, 3.5rem), env(safe-area-inset-right)) 3rem max(clamp(1rem, 4vw, 3.5rem), env(safe-area-inset-left)); }
+
+/* Mobile: the rail becomes a compact bar with an overlay menu ---------------- */
+@media (max-width: 56rem) {
+  .shell { display: block; }
+  .rail {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: auto;
+    padding: calc(0.5rem + env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) 0.5rem max(1rem, env(safe-area-inset-left));
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    /* No backdrop-filter here: it would make the fixed menu panel size itself to this bar. */
+    background: var(--bg);
+    overflow: visible;
+  }
+  .rail__bar { position: relative; z-index: 50; min-height: 44px; background: var(--bg); }
+
+  /* Without JS the menu simply stays open under the bar. */
+  .rail__panel { margin-top: 0.75rem; padding-bottom: 0.5rem; }
+  .rail__foot { margin-top: 0.5rem; }
+
+  .js .menu-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 0.8rem;
+    font: 500 0.78rem var(--font-mono);
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+  /* The open menu is a full-screen sheet under the bar (the bar stays on top with the Close button). */
+  .js .rail__panel {
+    position: fixed;
+    inset: 0;
+    z-index: 49;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: calc(4.25rem + env(safe-area-inset-top)) max(1.5rem, env(safe-area-inset-right)) calc(1.25rem + env(safe-area-inset-bottom)) max(1.5rem, env(safe-area-inset-left));
+    height: 100vh;
+    height: 100dvh;
+    background: var(--bg);
+    background-image: var(--grid-image);
+    background-size: var(--grid-size);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition: opacity var(--fast), transform var(--fast) var(--ease), visibility 0s var(--fast);
+  }
+  .js .rail.is-open .rail__panel {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+  .js .rail__group { margin: 0; border-top: 1px solid var(--line); }
+  .js .rail__group li { border-bottom: 1px solid var(--line); }
+  .js .rail__link {
+    min-height: 4rem;
+    padding-left: 1.6rem;
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+  }
+  .js .rail__link::before { width: 0.8rem; }
+  .js .rail__link[aria-current="page"]::before { width: 1.1rem; }
+  .js .rail__foot { margin-top: auto; padding-top: 1.5rem; border-top: 0; justify-content: flex-start; }
+  .main { min-height: 0; }
+}

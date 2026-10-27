@@ -1,0 +1,112 @@
+/* Design tokens. Dark is the default; light ("paper") applies via the toggle or
+   prefers-color-scheme. The inline head script sets data-theme before first paint. */
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader-var.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader-italic-var.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/jetbrains-mono-var.woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #07090b;
+  --bg-raised: #0d1114;
+  --bg-sunken: #040506;
+  --grid-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.07) 1px, transparent 1.6px);
+  --grid-size: 28px 28px;
+  --text: #e7ecea;
+  --text-dim: #9aa7a2;
+  --line: rgba(231, 236, 234, 0.14);
+  --line-strong: rgba(231, 236, 234, 0.3);
+  --laser: #3dff8a;
+  --laser-dim: rgba(61, 255, 138, 0.35);
+  --accent: #3dff8a; /* lines, fills, large accents */
+  --accent-text: #3dff8a; /* small text and links: must meet 4.5:1 */
+  --on-accent: #04120a;
+  --warn: #ffb454;
+  --beam: #3dff8a;
+  --beam-rgb: 61, 255, 138;
+  --optic: #9aa7a2;
+  --optic-strong: #e7ecea;
+  --code-bg: #0b0f12;
+  --focus: #ffffff;
+
+  --font-serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  --rail-w: 15.5rem;
+  --measure: 70ch;
+  --wide: 76rem;
+  --radius: 2px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --fast: 160ms;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f1e8;
+  --bg-raised: #fbf9f3;
+  --bg-sunken: #ebe7da;
+  --grid-image: linear-gradient(rgba(20, 60, 40, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 60, 40, 0.08) 1px, transparent 1px);
+  --grid-size: 24px 24px;
+  --text: #14201b;
+  --text-dim: #4b5b54;
+  --line: rgba(20, 32, 27, 0.16);
+  --line-strong: rgba(20, 32, 27, 0.38);
+  --laser: #0e9f4f;
+  --laser-dim: rgba(14, 159, 79, 0.35);
+  --accent: #0e9f4f;
+  --accent-text: #0a7a3b;
+  --on-accent: #04120a;
+  --warn: #8a5300;
+  --beam: #0e9f4f;
+  --beam-rgb: 14, 159, 79;
+  --optic: #4b5b54;
+  --optic-strong: #14201b;
+  --code-bg: #ece8da;
+  --focus: #14201b;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]):not([data-theme="light"]) {
+    color-scheme: light;
+    --bg: #f4f1e8;
+    --bg-raised: #fbf9f3;
+    --bg-sunken: #ebe7da;
+    --grid-image: linear-gradient(rgba(20, 60, 40, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20, 60, 40, 0.08) 1px, transparent 1px);
+    --grid-size: 24px 24px;
+    --text: #14201b;
+    --text-dim: #4b5b54;
+    --line: rgba(20, 32, 27, 0.16);
+    --line-strong: rgba(20, 32, 27, 0.38);
+    --laser: #0e9f4f;
+    --laser-dim: rgba(14, 159, 79, 0.35);
+    --accent: #0e9f4f;
+    --accent-text: #0a7a3b;
+    --warn: #8a5300;
+    --beam: #0e9f4f;
+    --beam-rgb: 14, 159, 79;
+    --optic: #4b5b54;
+    --optic-strong: #14201b;
+    --code-bg: #ece8da;
+    --focus: #14201b;
+  }
+}

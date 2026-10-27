@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page page--read">
+  <header class="page-header">
+    <h1>Contact</h1>
+    <p>Email is the fastest route. Replies may take a few lab-days.</p>
+  </header>
+  <ul class="contact-list">
+    {% for social in socials %}
+      <li>
+        {% if social.email %}
+          <a href="#" data-email="{{ social.email | reverse_str }}">
+            {% include "icons/" ~ social.icon ~ ".svg" %}
+            <span class="contact-list__label">{{ social.label }}</span>
+            <span class="contact-list__value" data-email-text>{{ social.email | spam_safe }}</span>
+          </a>
+        {% else %}
+          <a href="{{ social.url }}" target="_blank" rel="noopener me">
+            {% include "icons/" ~ social.icon ~ ".svg" %}
+            <span class="contact-list__label">{{ social.label }}</span>
+            <span class="contact-list__value">{{ social.url | host }}</span>
+          </a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  <noscript><p class="note">Email is assembled by JavaScript to keep scrapers out. Without it, read the address above and replace [at] and [dot].</p></noscript>
+</div>
+{% endblock %}

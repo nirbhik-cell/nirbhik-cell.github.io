@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% from "_macros.html" import row, research_rows %}
+{% block content %}
+<div class="page page--read">
+  <header class="page-header"><h1>Projects &amp; Publications</h1></header>
+
+  <section class="section" aria-labelledby="research-title">
+    <h2 id="research-title">Research</h2>
+    {{ research_rows(cv.experience) }}
+  </section>
+
+  <section class="section" aria-labelledby="projects-title">
+    <h2 id="projects-title">Projects</h2>
+    {% if cv.projects %}
+      <ul class="rows">
+        {% for p in cv.projects %}{{ row(p.year, p.title, p.summary, p.link, True, "h3", p.links, p.sample) }}{% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty">Nothing to show here yet.</p>
+    {% endif %}
+  </section>
+
+  <section class="section" aria-labelledby="pubs-title">
+    <h2 id="pubs-title">Publications</h2>
+    {% if cv.publications %}
+      <ul class="rows">
+        {% for p in cv.publications %}
+          {{ row(p.year, p.title, ((p.authors ~ ". ") if p.authors else "") ~ (p.venue or ""), p.link, True, "h3", p.links, p.sample) }}
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty">None yet. This page will list publications as they appear.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

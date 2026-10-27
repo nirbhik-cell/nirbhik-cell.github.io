@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page page--home">
+  <figure class="ng" data-ng>
+    {% include "ng.svg" %}
+    <canvas class="ng__canvas" aria-hidden="true" role="presentation"></canvas>
+  </figure>
+
+  <section class="intro intro--narrow" aria-labelledby="hero-title">
+    <h1 id="hero-title">{{ cv.name }}</h1>
+    <p class="intro__headline">{{ cv.headline }}</p>
+    <p class="intro__text">{{ cv.intro }}</p>
+    <div class="intro__cta">
+      <a class="button button--primary" href="#timeline">Follow the beam</a>
+      <a class="button" href="{{ '/cv/' | url }}">CV</a>
+    </div>
+  </section>
+
+  <section class="section section--narrow" id="about" aria-labelledby="about-title">
+    <h2 id="about-title">About</h2>
+    <div class="about">
+      <figure class="portrait">
+        {% if cv.photo %}
+          <img src="{{ ('/' ~ cv.photo.lstrip('/')) | url }}" alt="{{ cv.photo_alt or ('Portrait of ' ~ cv.name) }}" width="400" height="500">
+        {% else %}
+          <svg class="portrait__placeholder" viewBox="0 0 160 200" role="img" aria-label="Placeholder for a portrait photo">
+            <rect x="1" y="1" width="158" height="198" rx="3" class="portrait__frame"/>
+            <circle cx="80" cy="76" r="28" class="portrait__shape"/>
+            <path d="M24 188c0-34 25-58 56-58s56 24 56 58z" class="portrait__shape"/>
+            <text x="80" y="22" text-anchor="middle" class="portrait__label">YOUR PHOTO</text>
+          </svg>
+        {% endif %}
+      </figure>
+    <dl class="facts">
+        <div><dt>Studying</dt><dd>{{ cv.education[0].degree }}, {{ cv.education[0].institution }}</dd></div>
+        <div><dt>Languages</dt><dd>{{ cv.languages | join(", ") }}</dd></div>
+        <div><dt>Skills</dt><dd>{{ (cv.skills.programming + cv.skills.systems) | join(" · ") }}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" id="timeline" aria-labelledby="timeline-title">
+    <h2 id="timeline-title">Timeline</h2>
+    <p class="section__lede">One beam, drawn as you scroll. It forks into four tracks and rejoins at the present.</p>
+    {% include "_timeline.html" %}
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script type="module" src="{{ '/assets/js/ng-hero.js' | url }}?v={{ site.build_time }}"></script>
+<script type="module" src="{{ '/assets/js/timeline.js' | url }}?v={{ site.build_time }}"></script>
+{% endblock %}

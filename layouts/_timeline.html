@@ -1,0 +1,36 @@
+<div class="timeline" style="--cols: {{ cv.tracks | length }};" data-timeline>
+  <svg class="timeline__svg" aria-hidden="true" focusable="false" data-svg></svg>
+  <div class="timeline__grid" data-grid>
+    {% for track in cv.tracks %}
+      <section class="track track--{{ track.key }}" aria-labelledby="track-{{ track.key }}" style="--col: {{ track.col }};">
+        <h3 class="track__label" id="track-{{ track.key }}" data-label>{{ track.label }}<span>{{ track.blurb }}</span></h3>
+        <ol class="track__list" role="list">
+          {% for e in track.entries %}
+            <li class="milestone" id="{{ e.id }}" style="--col: {{ e.col }}; --row: {{ e.row }};">
+              <article class="milestone__card">
+                <p class="milestone__when">{% if e.period.startswith(e.year) %}<span class="milestone__year">{{ e.period }}</span>{% else %}<span class="milestone__year">{{ e.year }}</span><span class="visually-hidden">: </span><span class="milestone__period">{{ e.period }}</span>{% endif %}<span class="milestone__track">{{ e.track_label }}</span></p>
+                <h4 class="milestone__title">{{ e.title }}</h4>
+                {% if e.place %}<p class="milestone__place">{{ e.place }}</p>{% endif %}
+                {% if e.note or e.description or e.bullets or e.coursework or e.link %}
+                  <details class="milestone__more">
+                    <summary>Details<span class="visually-hidden">: {{ e.title }}</span></summary>
+                    <div class="milestone__detail">
+                      {% if e.note %}<p>{{ e.note }}</p>{% endif %}
+                      {% if e.description %}<p>{{ e.description }}</p>{% endif %}
+                      {% if e.coursework %}<p>Coursework: {{ e.coursework | join(", ") }}</p>{% endif %}
+                      {% if e.bullets %}<ul>{% for b in e.bullets %}<li>{{ b }}</li>{% endfor %}</ul>{% endif %}
+                      {% if e.link %}<p><a href="{{ e.link }}" target="_blank" rel="noopener">Lab page</a></p>{% endif %}
+                    </div>
+                  </details>
+                {% endif %}
+              </article>
+            </li>
+          {% else %}
+            <li class="track__empty" style="--col: {{ track.col }};">Nothing here yet.</li>
+          {% endfor %}
+        </ol>
+      </section>
+    {% endfor %}
+    <p class="timeline__now" style="--row: {{ cv.now_row }};" data-now>Now<span>The beam keeps going.</span></p>
+  </div>
+</div>

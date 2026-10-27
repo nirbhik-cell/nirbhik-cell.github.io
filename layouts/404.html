@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page lost">
+  <header class="page-header">
+    <h1>Beam lost</h1>
+    <p>That page does not exist, and two mirrors got knocked out of line. Rotate them back so the beam lands on <strong>HOME</strong>, or just use the link below.</p>
+  </header>
+
+  <div data-puzzle>
+    <div class="lost__stage" data-stage>
+      <canvas aria-hidden="true" role="presentation"></canvas>
+    </div>
+    <p class="lost__status" role="status" aria-live="polite" data-status></p>
+    <div class="lost__actions">
+      <a class="button button--primary" href="{{ '/' | url }}">Go home</a>
+      <button class="button" type="button" data-reset>Reset mirrors</button>
+    </div>
+    <p class="note">Tab to a mirror, then use the left and right arrow keys to rotate it. Or drag it.</p>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script type="module" src="{{ '/assets/js/puzzle-page.js' | url }}?v={{ site.build_time }}"></script>
+{% endblock %}

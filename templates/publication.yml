@@ -1,0 +1,11 @@
+# Publication template. Paste under `publications:` in _data/cv.yml. Only year and title are required.
+# `link` is the title link (usually the DOI); `links` are the small links under the row.
+  - year: 2027
+    title: Paper title
+    authors: N. Gupta, A. Coauthor
+    venue: Journal or conference, volume, pages
+    link: https://doi.org/10.0000/example
+    links:
+      - { label: PDF, url: "https://example.com/paper.pdf" }
+      - { label: arXiv, url: "https://arxiv.org/abs/0000.00000" }
+      - { label: Code, url: "https://github.com/your-username/your-repo" }

@@ -1,0 +1,62 @@
+/* Long-form reading: articles, code, tables, TOC, post navigation. */
+
+.article { max-width: var(--measure); }
+.article__header { margin-bottom: 2rem; }
+.article__header h1 { margin-bottom: 0.3em; }
+.article__lede { font-size: 1.25rem; color: var(--text-dim); }
+.article__links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+.back-link { display: inline-block; margin-bottom: 1.4rem; font: 500 0.78rem var(--font-mono); }
+
+.article__body { font-size: 1.1875rem; line-height: 1.7; }
+.article__body h2 { margin-top: 2.2em; }
+.article__body h3 { margin-top: 1.8em; }
+.article__body img,
+.article__body video,
+.article__body iframe { display: block; max-width: 100%; margin: 1.5rem 0; border: 1px solid var(--line); }
+.article__body iframe { width: 100%; aspect-ratio: 16 / 9; height: auto; }
+.article__body blockquote { margin: 1.5rem 0; padding: 0.2rem 1.2rem; border-left: 2px solid var(--accent); color: var(--text-dim); font-style: italic; }
+.article__body ul,
+.article__body ol { padding-left: 1.4rem; }
+.article__body li { margin-bottom: 0.35em; }
+.article__body li::marker { color: var(--accent-text); font-family: var(--font-mono); }
+
+.headerlink { margin-left: 0.4rem; font: 400 0.8em var(--font-mono); text-decoration: none; opacity: 0; color: var(--text-dim); }
+h2:hover .headerlink,
+h3:hover .headerlink,
+.headerlink:focus-visible { opacity: 1; }
+
+.article__body table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.98rem; display: block; overflow-x: auto; }
+.article__body th,
+.article__body td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--line); text-align: left; }
+.article__body th { font: 600 0.74rem var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; border-bottom-color: var(--line-strong); }
+
+.footnote { font-size: 0.92rem; color: var(--text-dim); }
+.footnote hr { margin: 2.5rem 0 1rem; }
+
+/* TOC */
+.toc { margin: 0 0 2rem; padding: 1rem 1.2rem; background: var(--bg-raised); border: 1px solid var(--line); font-size: 0.95rem; }
+.toc h2 { font: 600 0.72rem var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); margin: 0 0 0.6rem; }
+.toc ol { margin: 0; padding-left: 1.2rem; }
+.toc ol ol { margin-top: 0.2rem; }
+.toc li { margin: 0.2rem 0; }
+
+/* Code */
+.codehilite,
+.article__body pre { position: relative; margin: 1.5rem 0; background: var(--code-bg); border: 1px solid var(--line); border-left: 2px solid var(--accent); }
+.codehilite pre,
+.article__body pre { margin: 0; padding: 1rem 1.1rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.55; background: transparent; border: 0; }
+.codehilite code,
+.article__body pre code { background: transparent; border: 0; padding: 0; font-size: inherit; }
+.copy-btn { position: absolute; top: 0.4rem; right: 0.4rem; min-height: 32px; padding: 0 0.6rem; font: 500 0.7rem var(--font-mono); color: var(--text-dim); background: var(--bg-raised); border: 1px solid var(--line-strong); border-radius: var(--radius); cursor: pointer; }
+.copy-btn:hover { color: var(--accent-text); border-color: var(--accent); }
+
+/* Pygments: monokai-ish on dark, default on light. Generated into main.css by build.py. */
+
+.post-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.post-nav a { display: block; padding: 0.9rem 1rem; border: 1px solid var(--line); text-decoration: none; color: var(--text); }
+.post-nav a:hover { border-color: var(--accent); }
+.post-nav span { display: block; font: 500 0.7rem var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.2rem; }
+.post-nav__older { text-align: right; grid-column: 2; }
+
+.math-display { overflow-x: auto; }
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.2rem 0; }
