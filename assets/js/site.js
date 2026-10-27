@@ -78,6 +78,14 @@
     if (text) text.textContent = address;
   });
 
+  // Phone: same idea, reversed string assembled client-side ------------------------------------------
+  document.querySelectorAll("[data-phone]").forEach((link) => {
+    const number = link.dataset.phone.split("").reverse().join("");
+    link.setAttribute("href", "tel:+" + number.replace(/\D/g, ""));
+    const text = link.hasAttribute("data-phone-text") ? link : link.querySelector("[data-phone-text]");
+    if (text) text.textContent = number;
+  });
+
   // Copy buttons on code blocks --------------------------------------------------------------------
   document.querySelectorAll(".codehilite").forEach((block) => {
     if (!navigator.clipboard) return;

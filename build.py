@@ -380,6 +380,10 @@ def social_links(cv: dict[str, Any], order: list[dict[str, Any]]) -> list[dict[s
         if not value:
             continue
         link = {"label": item["label"], "icon": item["icon"]}
+        if item["key"] == "phone":
+            link["phone"] = value
+            links.append(link)
+            continue
         link["email" if item["key"].startswith("email") else "url"] = value
         links.append(link)
     return links
@@ -403,6 +407,7 @@ def make_env() -> Environment:
     env.filters["iso"] = lambda d: d.isoformat()
     env.filters["reverse_str"] = lambda s: str(s)[::-1]
     env.filters["spam_safe"] = lambda s: str(s).replace("@", " [at] ").replace(".", " [dot] ")
+    env.filters["spam_safe_phone"] = lambda s: "available with JavaScript enabled"
     env.filters["host"] = lambda s: re.sub(r"^https?://(www\.)?", "", str(s)).rstrip("/")
     return env
 

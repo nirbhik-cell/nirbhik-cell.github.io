@@ -8,7 +8,13 @@
   <ul class="contact-list">
     {% for social in socials %}
       <li>
-        {% if social.email %}
+        {% if social.phone %}
+          <a href="#" data-phone="{{ social.phone | reverse_str }}">
+            {% include "icons/" ~ social.icon ~ ".svg" %}
+            <span class="contact-list__label">{{ social.label }}</span>
+            <span class="contact-list__value" data-phone-text>{{ social.phone | spam_safe_phone }}</span>
+          </a>
+        {% elif social.email %}
           <a href="#" data-email="{{ social.email | reverse_str }}">
             {% include "icons/" ~ social.icon ~ ".svg" %}
             <span class="contact-list__label">{{ social.label }}</span>

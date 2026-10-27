@@ -13,3 +13,6 @@
 - label: Email(Institution)
   icon: email
   key: email_institute
+- label: Phone
+  icon: phone
+  key: phone

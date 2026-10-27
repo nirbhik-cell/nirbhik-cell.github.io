@@ -1,6 +1,8 @@
 {# One contact link. Email is assembled client-side from a reversed string. #}
 {% macro social_link(social) %}
-{% if social.email %}
+{% if social.phone %}
+<a class="social-link" href="{{ '/contact/' | url }}" data-phone="{{ social.phone | reverse_str }}" aria-label="{{ social.label }}">{% include "icons/" ~ social.icon ~ ".svg" %}</a>
+{% elif social.email %}
 <a class="social-link" href="{{ '/contact/' | url }}" data-email="{{ social.email | reverse_str }}" aria-label="{{ social.label }}">{% include "icons/" ~ social.icon ~ ".svg" %}</a>
 {% else %}
 <a class="social-link" href="{{ social.url }}" aria-label="{{ social.label }}" target="_blank" rel="noopener me">{% include "icons/" ~ social.icon ~ ".svg" %}</a>

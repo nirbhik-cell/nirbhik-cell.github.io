@@ -105,7 +105,7 @@
 /* Contact & social links -------------------------------------------------------------- */
 .contact-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-strong); }
 .contact-list li { border-bottom: 1px solid var(--line); }
-.contact-list a { display: grid; grid-template-columns: 1.6rem 6rem minmax(0, 1fr); align-items: center; gap: 0.5rem 1rem; min-height: 3.4rem; padding: 0.5rem 0; color: var(--text); text-decoration: none; }
+.contact-list a { display: grid; grid-template-columns: 1.6rem 11rem minmax(0, 1fr); align-items: center; gap: 0.5rem 1rem; min-height: 3.4rem; padding: 0.5rem 0; color: var(--text); text-decoration: none; }
 .contact-list a:hover .contact-list__value { color: var(--accent-text); text-decoration: underline; }
 .contact-list svg { width: 1.3rem; height: 1.3rem; fill: currentColor; }
 .contact-list__label { font: 500 0.76rem var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
