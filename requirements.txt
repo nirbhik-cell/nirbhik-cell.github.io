@@ -5,3 +5,4 @@ Markdown==3.7
 Pygments==2.18.0
 pymdown-extensions==10.12
 pypdfium2
+Pillow>=10
