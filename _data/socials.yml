@@ -10,3 +10,6 @@
 - label: Email
   icon: email
   key: email
+- label: Email(Institution)
+  icon: email
+  key: email_institute
