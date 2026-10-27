@@ -61,8 +61,8 @@ references: available on request
 # SAMPLE entries (marked `sample: true`, which adds a "Sample entry" note on the page). To replace one with
 # a real entry, edit it and delete the `sample: true` line. To remove it, delete the whole block.
 publications:
-  - year: 2027
-    title: "A Title For Your First Paper"
+  - year: 2100
+    title: "Hopefully a real publication title"
     authors: N. Gupta, A. Coauthor, B. Supervisor
     venue: Journal Name, volume, pages
     link: https://doi.org/10.0000/sample
